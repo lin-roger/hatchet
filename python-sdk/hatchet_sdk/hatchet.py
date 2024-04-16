@@ -1,6 +1,6 @@
 from hatchet_sdk.rate_limit import RateLimit
 from .client import ClientImpl, new_client 
-from typing import List
+from typing import List, Union
 import asyncio
 from functools import wraps
 from .workflow import WorkflowMeta
@@ -48,7 +48,7 @@ class Hatchet:
               timeout: str='', 
               parents: List[str] = [], 
               retries: int = 0, 
-              rate_limits: List[RateLimit] | None = None):
+              rate_limits: Union[List[RateLimit], None] = None):
         def inner(func):
             @wraps(func)
             def wrapper(*args, **kwargs):
@@ -70,5 +70,5 @@ class Hatchet:
 
         return inner
     
-    def worker(self, name: str, max_runs: int | None = None):
+    def worker(self, name: str, max_runs: Union[int, None] = None):
         return Worker(name=name, max_runs=max_runs)

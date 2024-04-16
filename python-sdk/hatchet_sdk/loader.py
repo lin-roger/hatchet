@@ -1,6 +1,6 @@
 import os
 import yaml
-from typing import Any, Optional, Dict
+from typing import Any, Optional, Dict, Union
 from .token import get_addresses_from_jwt, get_tenant_id_from_jwt
 
 class ClientTLSConfig:
@@ -44,7 +44,7 @@ class ConfigLoader:
             raise ValueError('Token must be set via HATCHET_CLIENT_TOKEN environment variable')
 
         host_port = config_data['hostPort'] if 'hostPort' in config_data else self._get_env_var('HATCHET_CLIENT_HOST_PORT')
-        server_url : str | None = None
+        server_url : Union[str, None] = None
 
         if not host_port:
             # extract host and port from token

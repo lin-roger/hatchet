@@ -1,14 +1,14 @@
-from typing import Any
+from typing import Any, Union
 import grpc
 
 
 def new_conn(config, aio=False):
 
-    credentials: grpc.ChannelCredentials | None = None
+    credentials: Union[grpc.ChannelCredentials, None] = None
 
     # load channel credentials
     if config.tls_config.tls_strategy == 'tls':
-        root: Any | None = None
+        root: Union[Any, None] = None
 
         if config.tls_config.ca_file:
             root = open(config.tls_config.ca_file, "rb").read()

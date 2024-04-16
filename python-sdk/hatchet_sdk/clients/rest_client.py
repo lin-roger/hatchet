@@ -1,4 +1,4 @@
-from typing import Any, Dict
+from typing import Any, Dict, Union
 from .rest.api_client import ApiClient
 from .rest.api.workflow_api import WorkflowApi
 from .rest.api.workflow_run_api import WorkflowRunApi
@@ -33,7 +33,7 @@ class RestApi:
             workflow=workflow_id,
         )
     
-    def workflow_version_get(self, workflow_id: str, version: str | None = None):
+    def workflow_version_get(self, workflow_id: str, version: Union[str, None] = None):
         return self.workflow_api.workflow_version_get(
             workflow=workflow_id,
             version=version,
@@ -41,10 +41,10 @@ class RestApi:
     
     def workflow_run_list(
         self, 
-        workflow_id: str | None = None,
-        offset: int | None = None,
-        limit: int | None = None,
-        event_id: str | None = None,
+        workflow_id: Union[str, None] = None,
+        offset: Union[int, None] = None,
+        limit: Union[int, None] = None,
+        event_id: Union[str, None] = None,
     ):
         return self.workflow_api.workflow_run_list(
             tenant=self.tenant_id,

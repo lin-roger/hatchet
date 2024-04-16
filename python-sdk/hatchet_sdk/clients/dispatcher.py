@@ -35,7 +35,7 @@ DEFAULT_REGISTER_TIMEOUT = 30
 
 
 class GetActionListenerRequest:
-    def __init__(self, worker_name: str, services: List[str], actions: List[str], max_runs: int | None = None):
+    def __init__(self, worker_name: str, services: List[str], actions: List[str], max_runs: Union[int, None] = None):
         self.worker_name = worker_name
         self.services = services
         self.actions = actions

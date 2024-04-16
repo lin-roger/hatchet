@@ -7,7 +7,7 @@ import threading
 import time
 
 import grpc
-from typing import Any, Callable, Dict
+from typing import Any, Callable, Dict, Union
 from .workflow import WorkflowMeta
 from .clients.dispatcher import GetActionListenerRequest, ActionListenerImpl, Action
 from .dispatcher_pb2 import ActionType, StepActionEvent, StepActionEventType, GroupKeyActionEvent, GroupKeyActionEventType, STEP_EVENT_TYPE_COMPLETED, STEP_EVENT_TYPE_STARTED, STEP_EVENT_TYPE_FAILED, GROUP_KEY_EVENT_TYPE_STARTED, GROUP_KEY_EVENT_TYPE_COMPLETED, GROUP_KEY_EVENT_TYPE_FAILED
@@ -19,7 +19,7 @@ from .logger import logger
 
 
 class Worker:
-    def __init__(self, name: str, max_runs: int | None = None, debug=False, handle_kill=True):
+    def __init__(self, name: str, max_runs: Union[int, None] = None, debug=False, handle_kill=True):
         self.client = new_client()
         self.name = self.client.config.namespace+name
         self.threads: Dict[str, Thread] = {}  # Store step run ids and threads

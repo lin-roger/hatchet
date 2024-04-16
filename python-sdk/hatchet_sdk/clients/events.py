@@ -1,3 +1,4 @@
+from typing import Union
 from ..events_pb2_grpc import EventsServiceStub
 from ..events_pb2 import PushEventRequest, PutLogRequest, PutStreamEventRequest
 
@@ -59,7 +60,7 @@ class EventClientImpl:
         except Exception as e:
             raise ValueError(f"Error logging: {e}")
         
-    def stream(self, data: str | bytes, step_run_id: str):
+    def stream(self, data: Union[str, bytes], step_run_id: str):
         try:
             if isinstance(data, str):
                 data_bytes = data.encode('utf-8')

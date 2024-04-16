@@ -27,7 +27,7 @@ class AdminClientImpl:
         self.client = client
         self.token = token
 
-    def put_workflow(self, name: str, workflow: CreateWorkflowVersionOpts | WorkflowMeta, overrides: CreateWorkflowVersionOpts | None = None) -> WorkflowVersion:
+    def put_workflow(self, name: str, workflow: Union[CreateWorkflowVersionOpts, WorkflowMeta], overrides: Union[CreateWorkflowVersionOpts, None] = None) -> WorkflowVersion:
         try:
             opts : CreateWorkflowVersionOpts
 

@@ -1,5 +1,5 @@
 from .workflows_pb2 import CreateWorkflowVersionOpts, CreateWorkflowJobOpts, CreateWorkflowStepOpts, WorkflowConcurrencyOpts
-from typing import Callable, List, Tuple, Any
+from typing import Callable, List, Tuple, Any, Union
 
 stepsType = List[Tuple[str, Callable[..., Any]]]
 
@@ -53,7 +53,7 @@ class WorkflowMeta(type):
             for func_name, func in attrs.items() if hasattr(func, '_step_name')
         ]
 
-        concurrency : WorkflowConcurrencyOpts | None = None
+        concurrency : Union[WorkflowConcurrencyOpts, None] = None
 
         if len(concurrencyActions) > 0:
             action = concurrencyActions[0]

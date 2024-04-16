@@ -1,6 +1,7 @@
 from concurrent.futures import ThreadPoolExecutor
 import inspect
 from multiprocessing import Event
+from typing import Union
 from .clients.dispatcher import Action
 from .client import ClientImpl
 from .clients.admin import TriggerWorkflowParentOptions
@@ -218,13 +219,13 @@ class Context:
         
         self.logger_thread_pool.submit(self._log, line)
 
-    def _put_stream(self, data: str | bytes):
+    def _put_stream(self, data: Union[str, bytes]):
         try:
             self.client.event.stream(data=data, step_run_id=self.stepRunId)
         except Exception as e:
             logger.error(f"Error putting stream event: {e}")
     
-    def put_stream(self, data: str | bytes):
+    def put_stream(self, data: Union[str, bytes]):
         if self.stepRunId == "":
             return
         
